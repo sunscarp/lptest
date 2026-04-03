@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --paper: #0b0b0b;
+  --paper-border: #27272a;
+  --accent: #ffffff;
+  --accent-strong: #d4d4d8;
+  --muted: #a1a1aa;
+  --positive: #22c55e;
+  --negative: #ef4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-paper-border: var(--paper-border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-muted: var(--muted);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  background-image:
+    radial-gradient(circle at 5% 0%, rgba(255, 255, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.06), transparent 35%),
+    linear-gradient(180deg, #000000 0%, #09090b 100%);
+  font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.paper-panel {
+  background: color-mix(in oklab, var(--paper) 93%, white 7%);
+  border: 1px solid var(--paper-border);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.04),
+    0 24px 70px rgba(17, 24, 39, 0.08);
+}
+
+.rise-in {
+  animation: rise-in 480ms ease-out both;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
