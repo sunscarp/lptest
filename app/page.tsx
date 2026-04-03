@@ -1,6 +1,14 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  FormEvent,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -162,7 +170,7 @@ function formatPercent(value: number) {
   return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
 }
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const lastQuickOpenKeyRef = useRef("");
   const [symbolInput, setSymbolInput] = useState("AAPL");
@@ -897,5 +905,23 @@ export default function Home() {
         )}
       </section>
     </div>
+  );
+}
+
+function HomeFallback() {
+  return (
+    <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 p-5 pt-20 md:p-10 md:pt-24">
+      <div className="rounded-2xl border border-zinc-800 bg-zinc-950/85 p-6">
+        <p className="text-sm text-zinc-400">Loading stock lens...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<HomeFallback />}>
+      <HomeContent />
+    </Suspense>
   );
 }
